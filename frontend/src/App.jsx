@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-// ---------- i18n (plain strings, no translate: wrappers) ----------
+// Use Render backend for all environments
+const API_BASE = "https://authenticity-validator.onrender.com";
+
+// ---------- i18n ----------
 const dict = {
   en: {
     brand: "Smart Certificate Verification Platform",
@@ -99,7 +102,7 @@ function AdminLogs({ t }) {
   const [items, setItems] = React.useState([]);
   const load = async () => {
     try {
-      const res = await fetch("http://localhost:5000/logs");
+      const res = await fetch(`${API_BASE}/logs`);
       const data = await res.json();
       setItems(data.items || []);
     } catch {}
@@ -140,7 +143,7 @@ function InstitutionForm({ t }) {
 
   const loadCount = async () => {
     try {
-      const r = await fetch("http://localhost:5000/registry-count");
+      const r = await fetch(`${API_BASE}/registry-count`);
       const j = await r.json();
       setCount(j.count ?? 0);
     } catch {}
@@ -173,7 +176,7 @@ function InstitutionForm({ t }) {
     if (Object.keys(er).length) return;
     setMsg("");
     try {
-      const r = await fetch("http://localhost:5000/publish-record", {
+      const r = await fetch(`${API_BASE}/publish-record`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form)
@@ -249,7 +252,7 @@ export default function App() {
     try {
       const formData = new FormData();
       formData.append("certificate", file);
-      const res = await fetch("http://localhost:5000/verify", { method: "POST", body: formData, mode: "cors" });
+      const res = await fetch(`${API_BASE}/verify`, { method: "POST", body: formData, mode: "cors" });
       if (!res.ok) {
         const text = await res.text().catch(() => "");
         throw new Error(`Request failed: ${res.status} ${res.statusText} ${text}`);
@@ -372,7 +375,7 @@ export default function App() {
         <h3 className="text-3xl font-bold mb-2">{t.adminTitle}</h3>
         <p className="text-white/80 mb-4">{t.adminDesc}</p>
         <div className="mb-4">
-          <a href="http://localhost:5000/export-logs.csv" className="px-4 py-2 bg-yellow-400 text-black rounded font-semibold">
+          <a href={`${API_BASE}/export-logs.csv`} className="px-4 py-2 bg-yellow-400 text-black rounded font-semibold">
             {t.downloadCSV}
           </a>
         </div>
