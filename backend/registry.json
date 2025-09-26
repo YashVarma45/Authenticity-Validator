@@ -1,0 +1,26 @@
+[
+  {
+    "certificateId": "CERT-2020-3344",
+    "rollNo": "JH/2019/0456",
+    "name": "Ramesh Kumar",
+    "course": "B.Tech (Computer Science & Engineering)",
+    "issuedOn": "2020-07-15",
+    "marks": "78.2%"
+  },
+  {
+    "certificateId": "CERT-2021-7788",
+    "rollNo": "MH/2020/1122",
+    "name": "Aarti Singh",
+    "course": "B.Sc (Mathematics)",
+    "issuedOn": "2021-08-20",
+    "marks": "82.0%"
+  },
+  {
+    "certificateId": "CERT-2019-5566",
+    "rollNo": "DL/2018/9045",
+    "name": "Vikram Mehta",
+    "course": "B.Com (Accounting)",
+    "issuedOn": "2019-06-30",
+    "marks": "69.5%"
+  }
+]
